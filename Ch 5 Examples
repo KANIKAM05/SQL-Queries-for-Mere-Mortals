@@ -26,3 +26,5 @@ or
 SELECT CONCAT('Order ', OrderNumber, ' took ', CAST((ShipDate-OrderDate) AS dec), ' days to ship.')AS DaysToShip 
 FROM Orders
 
+SELECT ClassID, StartTime, CAST(StartTime + '001000.00' AS time) AS RevisedStartTime 
+FROM Classes
