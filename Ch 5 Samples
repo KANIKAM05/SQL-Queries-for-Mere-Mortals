@@ -1,0 +1,12 @@
+SELECT ProductName, (RetailPrice * QuantityOnHand) AS InventoryValue 
+FROM Products
+
+SELECT OrderNumber, OrderDate, ShipDate, (ShipDate - OrderDate) AS DaysElapsed 
+FROM Orders
+
+SELECT EngagementNumber, StartDate, EndDate, CONCAT(((EndDate - StartDate) + 1), ' days') AS DueToRun 
+FROM Engagements
+
+SELECT EngagementNumber, ContractPrice 
+FROM Engagements
+
