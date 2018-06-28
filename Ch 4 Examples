@@ -1,0 +1,32 @@
+SELECT EmpFirstName, EmpLastName, EmpStreetAddress, EmpCity, EmpState, EmpZipCode 
+FROM Employees
+
+SELECT CategoryID, CategoryDescription 
+FROM Categories
+
+SELECT EmpFirstName, EmpLastName, EmpAreaCode, EmpPhoneNumber 
+FROM Employees
+
+SELECT ProductName, RetailPrice, CategoryID 
+FROM Products
+
+SELECT SubjectName, CategoryID, SubjectCode 
+FROM Subjects
+
+SELECT * 
+FROM Subjects
+
+SELECT DISTINCT BowlerCity 
+FROM Bowlers
+
+SELECT CategoryDescription 
+FROM Categories 
+ORDER BY CategoryDescription
+
+SELECT VendName, VendZipCode 
+FROM Vendors 
+ORDER BY VendZipCode
+
+SELECT EmpLastName, EmpFirstName, EmpAreaCode, EmpPhoneNumber, EmployeeID 
+FROM Employees 
+ORDER BY EmpLastName, EmpFirstName
