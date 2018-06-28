@@ -1,0 +1,37 @@
+SELECT VendName
+FROM Vendors
+
+SELECT ProductName, RetailPrice
+FROM Products
+
+SELECT DISTINCT CustState
+FROM Customers
+
+SELECT EntCity, EntStageName
+FROM entertainers
+ORDER BY EntCity, EntStageName
+
+SELECT DISTINCT StartDate
+FROM engagements
+
+SELECT *
+FROM Classes
+
+SELECT BuildingName, NumberOfFloors
+FROM Buildings
+ORDER BY BuildingName
+
+SELECT DISTINCT TourneyLocation
+FROM Tournaments
+ORDER BY TourneyLocation
+
+SELECT TourneyLocation, TourneyDate
+FROM Tournaments
+ORDER BY TourneyLocation ASC, TourneyDate DESC
+
+SELECT RecipeClassID, RecipeTitle
+FROM Recipes
+ORDER BY RecipeClassID, RecipeTitle
+
+SELECT DISTINCT RecipeClassID
+FROM Recipes
