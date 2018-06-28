@@ -9,3 +9,20 @@ FROM Orders
 or
 SELECT CONCAT ('Order Number', OrderNumber, ' was placed on ', OrderDate, '.') AS Order_Details 
 FROM Orders
+
+SELECT CONCAT (EmpFirstName, ' ', EmpLastName) AS EmployeeName, EmpBirthDate AS DateOfBirth 
+FROM Employees 
+
+SELECT CONCAT (AgtFirstName, ' ', AgtLastName) AS AgentName, Salary + (50000*CommissionRate) AS ProjectedIncome 
+FROM Agents
+or
+SELECT CONCAT(AgtFirstName, ' ', AgtLastName) AS AgtName, 'has a projected income of', 
+CAST(Salary + (50000*CommissionRate) AS DEC) AS ProjectedIncome 
+FROM Agents
+
+SELECT OrderNumber, CAST((ShipDate-OrderDate) AS dec) AS DaysToShip 
+FROM Orders
+or
+SELECT CONCAT('Order ', OrderNumber, ' took ', CAST((ShipDate-OrderDate) AS dec), ' days to ship.')AS DaysToShip 
+FROM Orders
+
