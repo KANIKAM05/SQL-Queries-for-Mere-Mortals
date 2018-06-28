@@ -1,0 +1,11 @@
+SELECT CONCAT (EntStageName, ' was signed on ', CAST(DateEntered AS CHAR)) AS Entry 
+FROM Entertainers
+
+SELECT CONCAT (ProductName, ' sells for $', CAST(RetailPrice AS CHAR)) AS Price 
+FROM Products
+
+SELECT CONCAT ('Order Number', CAST(OrderNumber AS CHAR), ' was placed on ', CAST(OrderDate AS CHAR), '.') AS Order_Details 
+FROM Orders
+or
+SELECT CONCAT ('Order Number', OrderNumber, ' was placed on ', OrderDate, '.') AS Order_Details 
+FROM Orders
