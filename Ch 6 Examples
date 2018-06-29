@@ -1,0 +1,24 @@
+SELECT CustFirstName, CustLastName 
+FROM Customers 
+WHERE CustState = 'WA'
+
+SELECT AgtFirstName, AgtLastName 
+FROM Agents 
+WHERE DateHired = '1977-03-14'
+
+SELECT VendName, VendPhoneNumber 
+FROM Vendors 
+WHERE VendCity <> 'Bellevue'
+
+SELECT OrderNumber, OrderDate, ShipDate 
+FROM Orders 
+WHERE ShipDate < OrderDate
+
+SELECT ClassID, Credits 
+FROM Classes 
+WHERE Credits > 4
+
+SELECT ProductNumber, ProductName, RetailPrice 
+FROM PRODUCTS 
+WHERE RetailPrice <= 50
+
