@@ -22,3 +22,39 @@ SELECT ProductNumber, ProductName, RetailPrice
 FROM PRODUCTS 
 WHERE RetailPrice <= 50
 
+SELECT CONCAT(StfLastName, ', ', StfFirstName) AS Name, DateHired 
+FROM Staff 
+WHERE DateHired BETWEEN '1986-07-01' AND '1986-07-31'
+
+SELECT CONCAT(StudLastName, ', ', StudFirstName) AS StudentName, CONCAT('(', StudAreaCode, ') ', StudPhoneNumber) AS PhoneNumber 
+FROM Students 
+WHERE StudLastName BETWEEN 'Ba' AND 'Bz'
+
+SELECT EngagementNumber, StartDate, EndDate 
+FROM Engagements 
+WHERE '2007-10-10' BETWEEN StartDate AND EndDate
+
+SELECT TourneyLocation 
+FROM Tournaments 
+WHERE TourneyDate IN ('2012-09-18', '2012-10-09', '2012-11-06')
+
+SELECT EntertainerID, EntStageName AS Name, EntCity AS City 
+FROM Entertainers 
+WHERE EntCity IN ('Seattle', 'Redmond', 'Bothell')
+
+SELECT CustomerID, CustLastName, CustFirstName 
+FROM Customers 
+WHERE CustLastName LIKE 'Mar%'
+
+SELECT VendName, VendStreetAddress 
+FROM Vendors 
+WHERE VendStreetAddress LIKE '%Forest%'
+
+
+
+
+
+
+
+
+
