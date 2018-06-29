@@ -10,3 +10,19 @@ FROM Engagements
 SELECT EngagementNumber, ContractPrice 
 FROM Engagements
 
+SELECT CONCAT(StfLastName, ', ', StfFirstName) AS Name, DateHired, timestampdiff(YEAR, DateHired, '2007-10-01') AS YearsWithSchool 
+FROM Staff 
+ORDER BY StfLastName, StfFirstName 
+
+SELECT CONCAT(StfLastName, ', ', StfFirstName) AS StaffMember, Salary, CAST(Salary* 0.07 AS dec) AS Bonus 
+FROM Staff 
+ORDER BY StfLastName, StfFirstName
+
+SELECT CONCAT(BowlerFirstName, ' ', BowlerLastName) AS Bowler, BowlerAddress, 
+CONCAT(BowlerCity, ', ', BowlerState, ' ', BowlerZip) AS CityStateZip 
+FROM Bowlers 
+ORDER BY BowlerZip
+
+SELECT BowlerID, MatchID, GameNumber, HandiCapScore, RawScore, (HandicapScore - RawScore) AS Difference 
+FROM Bowler_Scores 
+ORDER BY BowlerID, MatchID, GameNumber
