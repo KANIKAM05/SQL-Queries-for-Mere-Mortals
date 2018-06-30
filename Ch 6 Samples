@@ -1,0 +1,47 @@
+SELECT OrderNumber, CustomerID 
+FROM Orders 
+WHERE CustomerID = '1001'
+
+SELECT ProductName 
+FROM Products 
+WHERE ProductName LIKE 'dog%'
+ORDER BY ProductName
+
+SELECT EntStageName, EntCity 
+FROM Entertainers 
+WHERE EntCity IN ('Bellevue', 'Redmond', 'Woodinville') 
+ORDER BY EntStageName
+
+SELECT EngagementNumber, StartDate, EndDate 
+FROM Engagements 
+WHERE timestampdiff(Day, StartDate, EndDate) = '3'
+
+SELECT StfFirstName, StfLastName, Salary 
+FROM Staff 
+WHERE Salary >= 40000 AND SALARY <= 50000 
+ORDER BY StfFirstName, StfLastName
+or
+SELECT StfFirstName, StfLastName, Salary 
+FROM Staff 
+WHERE Salary BETWEEN 40000 AND 50000 
+ORDER BY StfFirstName, StfLastName
+
+SELECT StudFirstName, StudLastName, StudCity 
+FROM Students 
+WHERE StudLastName = 'Kennedy' OR StudCity = 'Seattle'
+
+SELECT WinningTeamID, MatchID, GameNumber 
+FROM Match_Games 
+WHERE GameNumber = 3 AND MatchID BETWEEN 1 AND 10
+
+SELECT BowlerFirstName, BowlerLastName, TeamID 
+FROM Bowlers 
+WHERE TEAMID IN ('3', '4', '5') AND BowlerLastName LIKE 'H%'
+
+SELECT RecipeTitle 
+FROM Recipes 
+WHERE Notes IS NULL
+
+SELECT IngredientName 
+FROM Ingredients 
+WHERE IngredientClassID = '2' AND IngredientName NOT LIKE '%CHICKEN%'
