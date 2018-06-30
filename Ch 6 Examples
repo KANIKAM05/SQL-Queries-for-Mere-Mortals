@@ -50,11 +50,62 @@ SELECT VendName, VendStreetAddress
 FROM Vendors 
 WHERE VendStreetAddress LIKE '%Forest%'
 
+SELECT CustFirstName, CustLastName 
+FROM Customers 
+WHERE CustState IS NULL
 
+SELECT EngagementNumber 
+FROM Engagements 
+WHERE ContractPrice IS NULL
 
+SELECT OrderNumber, OrderDate 
+FROM Orders 
+WHERE OrderDate NOT BETWEEN '2012-10-01' AND '2012-10-30'
 
+SELECT StaffID, Title 
+FROM Faculty
+WHERE Title NOT IN ('Professor', 'Associate Professor')
 
+SELECT CustFirstName,  CustLastName 
+FROM Customers 
+WHERE CustCity = 'Seattle' AND CustLastName LIKE 'H%'
 
+SELECT StfFirstName, StfLastName, StfCity, StfState 
+FROM Staff 
+WHERE StfCity = 'Seattle' OR StfState = 'OR'
 
+SELECT VendName, VendPhoneNumber 
+FROM Vendors 
+WHERE VendState = 'WA' OR VendState = 'CA'
 
+SELECT StfFirstName, StfLastName 
+FROM Staff 
+WHERE (StfAreaCode = '425' AND StfPhoneNumber LIKE '555%') OR (DateHired BETWEEN '1989-10-01' AND '1989-12-31')
 
+SELECT StfFirstName, StfLastName, Position 
+FROM Staff 
+WHERE (Position = 'Professor' OR Position = 'Associate Professor') AND DateHired = '1989-05-16'
+
+SELECT TourneyDate, TourneyLocation 
+FROM Tournaments 
+WHERE TourneyLocation NOT IN ('Bolero Lanes', 'Imperial Lanes', 'Thunderbird Lanes')
+
+SELECT BowlerID, BowlerFirstName, BowlerLastName 
+FROM Bowlers 
+WHERE NOT BowlerCity = 'Bellevue'
+or
+SELECT BowlerID, BowlerFirstName, BowlerLastName 
+FROM Bowlers 
+WHERE BowlerCity <> 'Bellevue'
+
+SELECT EngagementNumber, StartDate, EndDate 
+FROM Engagements 
+WHERE StartDate <= '2012-11-18' AND EndDate >= '2012-11-12'
+
+SELECT CustomerID, CustFirstName, CustLastName 
+FROM Customers 
+WHERE CustLastName = 'Hernandez'
+
+SELECT StfLastName, StfFirstName 
+FROM Staff 
+WHERE Position = 'Graduate Counselor' OR DateHired = '2007-09-01'
