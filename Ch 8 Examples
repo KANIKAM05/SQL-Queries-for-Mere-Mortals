@@ -1,0 +1,36 @@
+SELECT RecipeTitle, Preparation, RecipeClassDescription 
+FROM Recipe_Classes INNER JOIN Recipes 
+ON Recipe_Classes.RecipeClassID = Recipes.RecipeClassID
+or
+SELECT RecipeTitle, Preparation, RecipeClassDescription 
+FROM Recipe_Classes INNER JOIN Recipes 
+USING (RecipeClassID)
+or
+SELECT RecipeTitle, Preparation, RecipeClassDescription 
+FROM Recipe_Classes NATURAL INNER JOIN Recipes
+
+SELECT R.RecipeTitle, R.Preparation, RC.RecipeClassDescription 
+FROM Recipes AS R INNER JOIN Recipe_Classes AS RC 
+USING (RecipeClassID) 
+WHERE RC.RecipeClassDescription IN ('Main Course', 'Dessert')
+
+SELECT RI.RecipeSeqNo, RC.RecipeClassDescription AS RecipeType, R.RecipeTitle, R.Preparation, I.IngredientName, 
+  RI.Amount AS IngredientQuantity, M.MeasurementDescription 
+FROM (((recipe_classes AS RC 
+INNER JOIN recipes AS R 
+USING (RecipeClassID)) 
+INNER JOIN recipe_ingredients AS RI 
+USING (RecipeID)) 
+INNER JOIN Ingredients AS I 
+USING (IngredientID)) 
+INNER JOIN measurements AS M 
+USING (MeasureAmountID) 
+ORDER BY RI.RecipeSeqNo, RC.RecipeClassDescription, R.RecipeTitle
+
+SELECT R.RecipeTitle, I.IngredientName 
+FROM (recipes AS R 
+INNER JOIN recipe_ingredients 
+USING (RecipeID)) 
+INNER JOIN ingredients AS I 
+USING (IngredientID) 
+ORDER BY R.RecipeTitle, I.IngredientName
