@@ -1,0 +1,88 @@
+SELECT categories.CategoryDescription, products.ProductName 
+FROM Categories 
+INNER JOIN Products 
+USING (CategoryID) 
+ORDER BY categories.CategoryDescription, products.ProductName
+
+SELECT entertainers.EntStageName, engagements.StartDate, engagements.EndDate, engagements.ContractPrice 
+FROM entertainers 
+INNER JOIN engagements 
+USING (EntertainerID) 
+ORDER BY entertainers.EntStageName, engagements.StartDate
+
+SELECT DISTINCT subjects.SubjectName 
+FROM subjects 
+INNER JOIN classes 
+USING (SubjectID) 
+WHERE classes.WednesdaySchedule = 1 
+ORDER BY subjects.SubjectName
+
+SELECT teams.TeamName, CONCAT(bowlers.BowlerFirstName, ' ', bowlers.BowlerLastName) AS Captain 
+FROM teams 
+INNER JOIN bowlers 
+ON teams.CaptainID = bowlers.BowlerID 
+ORDER BY teams.TeamName
+
+SELECT DISTINCT recipes.RecipeTitle 
+FROM (recipes INNER JOIN recipe_ingredients 
+USING (RecipeID)) 
+INNER JOIN ingredients 
+USING (IngredientID) 
+WHERE ingredients.IngredientName IN ('beef', 'garlic') 
+ORDER BY recipes.RecipeTitle
+
+SELECT DISTINCT customers.CustFirstName, customers.CustLastName 
+FROM ((customers 
+INNER JOIN orders 
+USING (CustomerID)) 
+INNER JOIN order_details 
+USING (OrderNumber)) 
+INNER JOIN products 
+USING (ProductNumber) 
+WHERE products.ProductName LIKE '%Helmet%' 
+ORDER BY customers.CustFirstName
+
+SELECT DISTINCT entertainers.EntStageName 
+FROM (entertainers 
+INNER JOIN engagements 
+USING (EntertainerID)) 
+INNER JOIN customers 
+USING (CustomerID) 
+WHERE customers.CustLastName IN ('Berg', 'Hallmark') 
+ORDER BY entertainers.EntStageName
+
+SELECT tournaments.TourneyID, tournaments.TourneyLocation, tourney_matches.MatchID, tourney_matches.Lanes, 
+       OddTeam.TeamName AS OddLaneTeam, EvenTeam.TeamName AS EvenLaneTeam, match_games.GameNumber, Winner.TeamName AS Winner 
+FROM (((((tournaments 
+INNER JOIN tourney_matches 
+USING (TourneyID)) 
+INNER JOIN teams AS OddTeam 
+ON OddTeam.TeamID = tourney_matches.OddLaneTeamID) 
+INNER JOIN teams AS EvenTeam 
+ON EvenTeam.TeamID = tourney_matches.EvenLaneTeamID) 
+INNER JOIN match_games 
+USING (MatchID)) 
+INNER JOIN teams AS Winner 
+ON Winner.TeamID = match_games.WinningTeamID) 
+
+SELECT recipes.RecipeTitle AS MainCourseRecipe, ingredients.IngredientName AS Ingredients, 
+       measurements.MeasurementDescription, recipe_ingredients.Amount 
+FROM ((recipes 
+INNER JOIN recipe_ingredients 
+USING (RecipeID)) 
+INNER JOIN ingredients 
+USING (IngredientID)) 
+INNER JOIN measurements 
+ON Measurements.MeasureAmountID = Recipe_Ingredients.MeasureAmountID 
+WHERE recipes.RecipeClassID = '1' 
+ORDER BY recipes.RecipeTitle, ingredients.IngredientName
+
+
+
+
+
+
+
+
+
+
