@@ -1,0 +1,47 @@
+SELECT orders.OrderDate, customers.CustFirstName, customers.CustLastName 
+FROM orders 
+INNER JOIN customers 
+USING (CustomerID) 
+ORDER BY orders.OrderDate, customers.CustFirstName
+
+SELECT DISTINCT CONCAT(employees.EmpFirstName, ' ', employees.EmpLastName) AS Employee, 
+                CONCAT(customers.CustFirstName, ' ', customers.CustLastName) AS Customer 
+FROM (employees 
+INNER JOIN orders 
+USING (EmployeeID)) 
+INNER JOIN customers 
+USING (CustomerID) 
+ORDER BY employees.EmpFirstName, customers.CustFirstName
+
+SELECT orders.OrderNumber, orders.OrderDate, products.ProductName, order_details.QuantityOrdered, order_details.QuotedPrice 
+FROM (orders 
+INNER JOIN order_details 
+USING (OrderNumber)) 
+INNER JOIN products 
+USING (ProductNumber) 
+ORDER BY orders.OrderNumber, orders.OrderDate, products.ProductName
+
+SELECT vendors.VendName, products.ProductName, product_vendors.WholesalePrice 
+FROM (vendors 
+INNER JOIN product_vendors 
+USING (VendorID)) 
+INNER JOIN products 
+USING (ProductNumber) 
+WHERE product_vendors.WholesalePrice < '100' 
+ORDER BY vendors.VendName, products.ProductName
+
+SELECT CONCAT(customers.CustFirstName, ' ',customers.CustLastName) AS Customer, 
+       CONCAT(employees.EmpFirstName, ' ', customers.CustLastName) AS Employee 
+FROM customers 
+INNER JOIN employees 
+ON customers.CustLastName=employees.EmpLastName
+ORDER BY customers.CustFirstName, employees.EmpFirstName
+
+SELECT CONCAT(customers.CustFirstName, ' ',customers.CustLastName) AS Customer, 
+       CONCAT(employees.EmpFirstName, ' ', customers.CustLastName) AS Employee, customers.CustCity AS City 
+FROM customers 
+INNER JOIN employees 
+ON customers.CustCity=employees.EmpCity 
+ORDER BY customers.CustFirstName, employees.EmpFirstName
+
+325
