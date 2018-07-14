@@ -77,7 +77,24 @@ ON Measurements.MeasureAmountID = Recipe_Ingredients.MeasureAmountID
 WHERE recipes.RecipeClassID = '1' 
 ORDER BY recipes.RecipeTitle, ingredients.IngredientName
 
-
+---------------
+SELECT R.RecipeTitle, R. IngredientName 
+FROM (SELECT recipes.RecipeTitle, ingredients.IngredientName 
+       FROM (recipes 
+       INNER JOIN recipe_ingredients 
+       USING (RecipeID)) 
+       INNER JOIN ingredients 
+       USING (IngredientID)) 
+       AS R 
+INNER JOIN (SELECT recipes.RecipeTitle, ingredients.IngredientName 
+       FROM (recipes 
+       INNER JOIN recipe_ingredients 
+       USING (RecipeID)) 
+       INNER JOIN ingredients 
+       USING (IngredientID) 
+       WHERE ingredients.IngredientName LIKE '%carrot%') 
+       AS CarrotRecipe 
+ON R.RecipeTitle=CarrotRecipe.RecipeTitle
 
 
 
