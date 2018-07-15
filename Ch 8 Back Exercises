@@ -44,4 +44,95 @@ INNER JOIN employees
 ON customers.CustCity=employees.EmpCity 
 ORDER BY customers.CustFirstName, employees.EmpFirstName
 
-325
+SELECT CONCAT(agents.AgtFirstName, ' ',agents.AgtLastName) AS Agent, engagements.StartDate 
+FROM agents 
+INNER JOIN engagements 
+USING (AgentID) 
+ORDER BY engagements.StartDate
+
+SELECT DISTINCT CONCAT (CustFirstName, ' ', CustLastName) AS Customer, entertainers.EntStageName AS Entertainer 
+FROM (customers 
+INNER JOIN engagements 
+USING (CustomerID)) 
+INNER JOIN entertainers 
+USING (EntertainerID)
+
+SELECT DISTINCT CONCAT (AgtFirstName, ' ', AgtLastName) AS Agent, entertainers.EntStageName AS Entertainer, agents.AgtZipCode AS ZipCode 
+FROM agents 
+INNER JOIN entertainers 
+ON agents.AgtZipCode=entertainers.EntZipCode
+
+SELECT buildings.BuildingName, class_rooms.ClassRoomID 
+FROM buildings 
+INNER JOIN class_rooms 
+USING (BuildingCode)
+
+SELECT DISTINCT CONCAT(students.StudFirstName, ' ', students.StudLastName) AS StudentName, classes.ClassID, subjects.SubjectName 
+FROM ((students 
+INNER JOIN student_schedules 
+USING (StudentID)) 
+INNER JOIN classes 
+USING (ClassID)) 
+INNER JOIN subjects 
+USING (SubjectID)
+
+SELECT DISTINCT CONCAT(staff.StfFirstName, ' ', staff.StfLastName) AS StaffName, subjects.SubjectName 
+FROM (Staff 
+INNER JOIN faculty_subjects 
+USING (StaffID)) 
+INNER JOIN subjects 
+USING (SubjectID)
+
+SELECT CONCAT(students.StudFirstName, ' ',students.StudLastName) AS StudentName, subjects.SubjectName, student_schedules.Grade 
+FROM ((students 
+INNER JOIN student_schedules 
+USING (StudentID)) 
+INNER JOIN classes 
+USING (ClassID)) 
+INNER JOIN subjects 
+USING (SubjectID) 
+WHERE (subjects.SubjectName LIKE '%art%' AND student_schedules.Grade >= '85') 
+      AND (subjects.SubjectName LIKE '%computer%' AND student_schedules.Grade >= '85')
+      
+SELECT teams.TeamName, CONCAT(bowlers.BowlerFirstName, ' ', bowlers.BowlerLastName) AS Members 
+FROM teams 
+INNER JOIN bowlers 
+ON teams.TeamID=bowlers.TeamID 
+ORDER BY teams.TeamName, bowlers.BowlerFirstName 
+
+3. “Find the bowlers who live in the same ZIP Code.”
+
+SELECT bowler_scores.MatchID, CONCAT(bowlers.BowlerFirstName, ' ',bowlers.BowlerLastName) AS BowlerName, bowler_scores.GameNumber, 
+       bowler_scores.RawScore, bowler_scores.HandiCapScore 
+FROM bowlers 
+INNER JOIN bowler_scores 
+USING (BowlerID)
+
+Recipes Database
+
+1. “List all the recipes for salads.”
+
+SELECT recipes.RecipeTitle 
+FROM recipes 
+WHERE RecipeClassID = '4'
+
+or
+
+SELECT recipes.RecipeTitle 
+FROM recipes 
+INNER JOIN recipe_classes 
+USING (RecipeClassID) 
+WHERE recipe_classes.RecipeClassDescription = 'salad'
+
+2. “List all recipes that contain a dairy ingredient.”
+
+SELECT DISTINCT recipes.RecipeTitle AS RecipesContainingDairy 
+FROM (recipes 
+INNER JOIN recipe_ingredients 
+USING (RecipeID)) 
+INNER JOIN ingredients USING (IngredientID) 
+WHERE ingredients.IngredientClassID='8'
+
+326
+
+
