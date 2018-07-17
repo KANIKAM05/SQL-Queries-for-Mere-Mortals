@@ -1,0 +1,16 @@
+1. “Show me all the recipe types and any matching recipes in my database.”
+
+SELECT recipe_classes.RecipeClassDescription, recipes.RecipeTitle 
+FROM recipe_classes 
+LEFT OUTER JOIN recipes 
+USING (RecipeClassID)
+
+2. “List the recipe classes that do not yet have any recipes.”
+
+SELECT recipe_classes.RecipeClassDescription 
+FROM recipe_classes 
+LEFT OUTER JOIN recipes 
+USING (RecipeClassID) 
+WHERE recipes.RecipeClassID IS NULL
+
+337
