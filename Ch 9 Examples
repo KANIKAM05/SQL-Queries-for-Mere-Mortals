@@ -13,4 +13,17 @@ LEFT OUTER JOIN recipes
 USING (RecipeClassID) 
 WHERE recipes.RecipeClassID IS NULL
 
-337
+3. "You are interested only in classes Salads, Soups,and Main courses + Recipes that contain the word 'beef' in their titles."
+
+SELECT DISTINCT RClass.Class, Recipe.RecipeTitle 
+FROM (SELECT RecipeClassID, RecipeClassDescription AS Class 
+     FROM recipe_classes 
+     WHERE RecipeClassDescription IN ('Salad', 'Soup', 'Main Course')) 
+     AS RClass 
+LEFT OUTER JOIN (SELECT RecipeClassID, RecipeTitle 
+     FROM recipes 
+     WHERE RecipeTitle LIKE '%beef%') 
+     AS Recipe 
+ON RClass.RecipeClassID=Recipe.RecipeClassID
+
+339
