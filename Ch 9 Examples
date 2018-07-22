@@ -26,4 +26,11 @@ LEFT OUTER JOIN (SELECT RecipeClassID, RecipeTitle
      AS Recipe 
 ON RClass.RecipeClassID=Recipe.RecipeClassID
 
-339
+4. “I need all the recipe types, and then the matching recipe names, preparation instructions, ingredient names, ingredient step numbers, 
+ingredient quantities, and ingredient measurements from my recipes database, sorted in recipe title and step number sequence.”
+
+SELECT DISTINCT recipe_classes.RecipeClassDescription, recipes.RecipeTitle, recipes.Preparation, ingredients.IngredientName, recipe_ingredients.RecipeSeqNo, recipe_ingredients.Amount, measurements.MeasurementDescription FROM (((recipe_classes INNER JOIN recipes USING (RecipeClassID)) INNER JOIN recipe_ingredients USING (RecipeID)) INNER JOIN measurements USING (MeasureAmountID)) INNER JOIN ingredients USING (IngredientID) ORDER BY recipes.RecipeTitle, recipe_ingredients.RecipeSeqNo
+
+344
+
+
