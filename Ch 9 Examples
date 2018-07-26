@@ -29,8 +29,46 @@ ON RClass.RecipeClassID=Recipe.RecipeClassID
 4. “I need all the recipe types, and then the matching recipe names, preparation instructions, ingredient names, ingredient step numbers, 
 ingredient quantities, and ingredient measurements from my recipes database, sorted in recipe title and step number sequence.”
 
-SELECT DISTINCT recipe_classes.RecipeClassDescription, recipes.RecipeTitle, recipes.Preparation, ingredients.IngredientName, recipe_ingredients.RecipeSeqNo, recipe_ingredients.Amount, measurements.MeasurementDescription FROM (((recipe_classes INNER JOIN recipes USING (RecipeClassID)) INNER JOIN recipe_ingredients USING (RecipeID)) INNER JOIN measurements USING (MeasureAmountID)) INNER JOIN ingredients USING (IngredientID) ORDER BY recipes.RecipeTitle, recipe_ingredients.RecipeSeqNo
+SELECT DISTINCT recipe_classes.RecipeClassDescription, recipes.RecipeTitle, recipes.Preparation, ingredients.IngredientName, 
+       recipe_ingredients.RecipeSeqNo, recipe_ingredients.Amount, measurements.MeasurementDescription 
+FROM (((recipe_classes 
+INNER JOIN recipes 
+USING (RecipeClassID)) 
+INNER JOIN recipe_ingredients 
+USING (RecipeID)) 
+INNER JOIN measurements 
+USING (MeasureAmountID)) 
+INNER JOIN ingredients 
+USING (IngredientID) 
+ORDER BY recipes.RecipeTitle, recipe_ingredients.RecipeSeqNo
 
-344
+or
+SELECT DISTINCT recipe_classes.RecipeClassDescription, recipes.RecipeTitle, recipes.Preparation, ingredients.IngredientName, 
+       recipe_ingredients.RecipeSeqNo, recipe_ingredients.Amount, measurements.MeasurementDescription 
+FROM (((recipe_classes 
+LEFT OUTER JOIN recipes 
+USING (RecipeClassID)) 
+INNER JOIN recipe_ingredients 
+USING (RecipeID)) 
+INNER JOIN measurements 
+USING (MeasureAmountID)) 
+INNER JOIN ingredients 
+USING (IngredientID) 
+ORDER BY recipes.RecipeTitle, recipe_ingredients.RecipeSeqNo
 
+5. “I need all the recipe types, and then all the recipe names and preparation instructions, and then any matching ingredient step 
+numbers, ingredient quantities, and ingredient measurements, and finally all ingredient names from my recipes database, sorted in recipe 
+title and step number sequence.”
 
+SELECT DISTINCT recipe_classes.RecipeClassDescription, recipes.RecipeTitle, recipes.Preparation, ingredients.IngredientName, 
+       recipe_ingredients.RecipeSeqNo, recipe_ingredients.Amount, measurements.MeasurementDescription 
+FROM (((recipe_classes 
+LEFT OUTER JOIN recipes 
+USING (RecipeClassID)) 
+LEFT OUTER JOIN recipe_ingredients 
+USING (RecipeID)) 
+INNER JOIN measurements 
+USING (MeasureAmountID)) 
+INNER JOIN ingredients 
+USING (IngredientID) 
+ORDER BY recipes.RecipeTitle, recipe_ingredients.RecipeSeqNo
