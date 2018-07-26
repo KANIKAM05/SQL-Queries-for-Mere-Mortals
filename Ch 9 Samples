@@ -1,0 +1,76 @@
+SALES ORDERS DATABASE
+
+1. “What products have never been ordered?”
+
+SELECT products.ProductNumber, products.ProductName 
+FROM products 
+LEFT OUTER JOIN order_details 
+USING (ProductNumber) 
+WHERE order_details.OrderNumber IS NULL
+
+2. “Display all customers and any orders for bicycles.”
+
+SELECT customer.CustomerName, bicycle.OrderDate, bicycle.ProductName, bicycle.QuantityOrdered, bicycle.QuotedPrice 
+FROM (SELECT customers.CustomerID, CONCAT(customers.CustFirstName, ' ', customers.CustLastName) AS CustomerName 
+      FROM customers) 
+      AS customer 
+LEFT OUTER JOIN (SELECT customers.CustomerID, orders.OrderDate, products.ProductName, order_details.QuantityOrdered, 
+      order_details.QuotedPrice 
+      FROM customers 
+      INNER JOIN orders 
+      USING (CustomerID) 
+      INNER JOIN order_details 
+      USING (OrderNumber) 
+      INNER JOIN products 
+      USING (ProductNumber) 
+      INNER JOIN categories 
+      USING (CategoryID) 
+      WHERE categories.CategoryDescription='bikes') 
+      AS bicycle 
+ON customer.CustomerID=bicycle.CustomerID
+
+ENTERTAINMENT AGENCY DATABASE
+
+3. “List entertainers who have never been booked.”
+
+SELECT entertainers.EntertainerID, entertainers.EntStageName 
+FROM entertainers 
+LEFT OUTER JOIN engagements 
+USING (EntertainerID) 
+WHERE engagements.EngagementNumber IS NULL
+
+4. “Show me all musical styles and the customers who prefer those styles.”
+
+SELECT musical_styles.StyleID, musical_styles.StyleName, customers.CustomerID, customers.CustFirstName, customers.CustLastName 
+FROM musical_styles 
+LEFT OUTER JOIN (musical_preferences 
+INNER JOIN customers 
+USING (CustomerID)) 
+USING (StyleID)
+
+SCHOOL SCHEDULING DATABASE
+
+5. “List the faculty members not teaching a class.”
+
+SELECT staff.StfFirstName, staff.StfLastname 
+FROM staff 
+LEFT OUTER JOIN faculty_classes 
+USING (StaffID) 
+WHERE faculty_classes.ClassID IS NULL
+
+6. “Display students who have never withdrawn from a class.”
+
+SELECT DISTINCT students.StudFirstName, students.StudLastName 
+FROM students 
+LEFT OUTER JOIN (SELECT students.StudentID, student_schedules.ClassStatus 
+                FROM students 
+                INNER JOIN student_schedules 
+                USING (StudentID) 
+                WHERE student_schedules.ClassStatus = '3') 
+                AS withdrew 
+USING (StudentID) 
+WHERE withdrew.StudentID IS NULL
+
+7. “Show me all subject categories and any classes for all subjects.”
+
+362
